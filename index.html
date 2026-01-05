@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>しんおみ規約ページ</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background-color: #1e88e5;
+            color: white;
+            padding: 16px 24px;
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-box {
+            width: 28px;
+            height: 28px;
+            background-color: #e53935;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 2px;
+        }
+
+        main {
+            padding: 32px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .content-box {
+            background-color: white;
+            border: 1px solid #000;
+            padding: 32px;
+            width: 800px;
+            min-height: 300px;
+            text-align: center;
+        }
+
+        .main-text {
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            transition: opacity 0.6s ease;
+        }
+
+        .hide-text {
+            opacity: 0;
+        }
+
+        .button-area {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .agree-button {
+            padding: 10px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: #c8e6c9;
+            border: 1px solid #81c784;
+            color: #2e7d32;
+            border-radius: 6px;
+            transition: opacity 0.6s ease;
+        }
+
+        .fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .confirm-image {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .confirm-image img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div>しんおみ規約</div>
+    <div class="close-box">×</div>
+</header>
+
+<main>
+    <div class="content-box">
+        <div class="main-text" id="mainText">
+            利用規約に同意しますか？
+        </div>
+
+        <div class="button-area" id="buttonArea">
+            <script>
+                for (let i = 0; i < 32; i++) {
+                    document.write(
+                        '<button class="agree-button" onclick="agree(this)">同意する</button>'
+                    );
+                }
+            </script>
+        </div>
+
+        <div class="confirm-image" id="confirmImage">
+            <img src="confirm.png" alt="確認完了">
+        </div>
+    </div>
+</main>
+
+<script>
+    function agree(button) {
+        // 押されたボタンをフェードアウト
+        button.classList.add("fade-out");
+
+        setTimeout(() => {
+            const remaining =
+                document.querySelectorAll(".agree-button:not(.fade-out)").length;
+
+            if (remaining === 0) {
+                // メインテキストを消す
+                document.getElementById("mainText").classList.add("hide-text");
+
+                // ボタンを非表示
+                document.getElementById("buttonArea").style.display = "none";
+
+                // 画像表示
+                document.getElementById("confirmImage").style.display = "block";
+            }
+        }, 600);
+    }
+</script>
+
+</body>
+</html>
